@@ -51,8 +51,9 @@ public class Main {
             } while (!validValue);
             validValue = false; //resetting value to be reused
 
-            for (int i = 1; i <= numPlayers; i++) {
-
+            int[] players = new int[numPlayers];
+            for (int i = 0; i < numPlayers; i++) {
+                players[i] = (int) (Math.random() * numSides) + 1;
             }
 
             do { //asks the player if they want to roll another round
