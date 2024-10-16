@@ -12,6 +12,7 @@ public class Main {
         int highestPScore = 0;
         int lowestP = 0;
         int lowestPScore = 0;
+        int difference = 0;
 
         /*
         int randomSide;
@@ -24,6 +25,7 @@ public class Main {
                 numPlayers = scan.nextInt();
                 if (numPlayers > 1) {//making sure it's more than one player
                     validValue = true;
+
                 } else {
                     System.out.println("You entered an invalid value. Please try again.\n"); //making new line after all errors for readability
                 }
@@ -33,6 +35,7 @@ public class Main {
             scan.nextLine();
         } while (!validValue);
         validValue = false; //resetting value to be reused
+        int[] playerTotals = new int[numPlayers]; //declaring list that hold overall money won/lost, this has to be declared here so it isn't reset every round
 
         do { //this part repeats with playAgain depending on input
             do { //gets the number of sides just for this round
@@ -51,9 +54,39 @@ public class Main {
             } while (!validValue);
             validValue = false; //resetting value to be reused
 
-            int[] players = new int[numPlayers];
-            for (int i = 0; i < numPlayers; i++) {
+            int[] players = new int[numPlayers]; //declaring list that holds the score for players every round
+            for (int i = 0; i < numPlayers; i++) { //assigning and outputting player rolls
                 players[i] = (int) (Math.random() * numSides) + 1;
+                System.out.println("Player " + (i + 1) + " rolled " + players[i]);
+            }
+
+            highestP = 0;
+            highestPScore = players[0];
+            for (int i = 0; i < numPlayers; i++) { //determines the player with the highest score and stores the player and what the score is
+                if (players[i] > highestPScore) {
+                    highestP = i;
+                    highestPScore = players[i];
+                }
+            }
+
+            lowestP = 0;
+            lowestPScore = players[0];
+            for (int i = 0; i < numPlayers; i++) { //determines the player with the lowest score and stores the player and what the score is
+                if (players[i] < lowestPScore){
+                    lowestP = i;
+                    lowestPScore = players[i];
+                }
+            }
+
+            difference = highestPScore - lowestPScore;
+            playerTotals[highestP] += difference;
+            playerTotals[lowestP] -= difference;
+            System.out.println("Player " + (lowestP + 1) + " owes Player " + (highestP + 1) + " " + difference + " gold.");
+
+            //prints overall money gained/lost for every player
+            System.out.println("Money gained/lost per player:");
+            for (int i = 0; i < numPlayers; i++) {
+                System.out.println("Player " + (i + 1) + ": " + playerTotals[i]);
             }
 
             do { //asks the player if they want to roll another round
@@ -68,32 +101,7 @@ public class Main {
             } while (!validValue);
             validValue = false;
             numSides = 0; //resetting so it doesn't break code if played again
-            /*
-            System.out.println("Enter the number of sides on your die (>1):");
-            if (scan.hasNextInt()) {
-                numSides = scan.nextInt();
-                if (numSides <= 0) {
-                    System.out.println("You have entered an invalid number of sides.");
-                    System.exit(0);
-                }
-                if (numSides != 1) {
-                    randomSide = (int) (Math.random() * numSides) + 1;
-                    System.out.println("Player 1 rolled " + randomSide);
-                    randomSide2 = (int) (Math.random() * numSides) + 1;
-                    System.out.println("Player 2 rolled " + randomSide2);
 
-                    if (randomSide2 == randomSide) {
-                        System.out.println("It's a tie!");
-                    } else if (randomSide > randomSide2) {
-                        System.out.println("Player 1 wins. Player 2 owes Player 1 " + (randomSide - randomSide2) + " gold.");
-                    } else {
-                        System.out.println("Player 2 wins. Player 1 owes Player 2 " + (randomSide2 - randomSide) + " gold.");
-                    }
-                }
-            } else {
-                System.out.println("You have entered an invalid data type.");
-                scan.nextLine();
-            */
         }while(playAgain.equalsIgnoreCase("Yes") || playAgain.equalsIgnoreCase("Y") || playAgain.equalsIgnoreCase("Yea"));
         System.out.println("Thanks for playing!");
     }
