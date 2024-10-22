@@ -84,7 +84,7 @@ public class Main {
             System.out.println("Player " + (lowestP + 1) + " owes Player " + (highestP + 1) + " " + difference + " gold.");
 
             //prints overall money gained/lost for every player
-            System.out.println("Money gained/lost per player:");
+            System.out.println("\nTotal money gained/lost per player:");
             for (int i = 0; i < numPlayers; i++) {
                 System.out.println("Player " + (i + 1) + ": " + playerTotals[i]);
             }
