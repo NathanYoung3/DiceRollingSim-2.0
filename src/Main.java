@@ -62,17 +62,15 @@ public class Main {
 
             highestP = 0;
             highestPScore = players[0];
-            for (int i = 0; i < numPlayers; i++) { //determines the player with the highest score and stores the player and what the score is
-                if (players[i] > highestPScore) {
+            lowestP = 0;
+            lowestPScore = players[0];
+            for (int i = 0; i < numPlayers; i++) {
+                if (players[i] > highestPScore) {//determines the player with the highest score and stores the player and what the score is
                     highestP = i;
                     highestPScore = players[i];
                 }
-            }
 
-            lowestP = 0;
-            lowestPScore = players[0];
-            for (int i = 0; i < numPlayers; i++) { //determines the player with the lowest score and stores the player and what the score is
-                if (players[i] < lowestPScore){
+                if (players[i] < lowestPScore){//determines the player with the lowest score and stores the player and what the score is
                     lowestP = i;
                     lowestPScore = players[i];
                 }
